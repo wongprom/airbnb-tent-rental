@@ -16,6 +16,7 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [numberOfGuests, setNumberOfGuests] = useState(1);
 
   const selectionRange = {
     startDate: startDate,
@@ -26,6 +27,10 @@ const Header = () => {
   const handleSelect = (ranges) => {
     setStartDate(ranges.selection.startDate);
     setEndDate(ranges.selection.endDate);
+  };
+
+  const resetInput = () => {
+    setSearchInput('');
   };
 
   return (
@@ -70,6 +75,25 @@ const Header = () => {
             minDate={new Date()}
             onChange={handleSelect}
           />
+          <div className="flex items-center border-b mb-4">
+            <h2 className="text-2xl flex-grow font-semibold ">
+              Number of Guests
+            </h2>
+            <UserCircleIcon className="h-5" />
+            <input
+              value={numberOfGuests}
+              min={1}
+              onChange={(e) => setNumberOfGuests(e.target.value)}
+              type="number"
+              className="w-12 pl-2 text-lg outline-none text-otr-primaryOrange"
+            />
+          </div>
+          <div className="flex ">
+            <button onClick={resetInput} className="flex-grow text-gray-500">
+              Cancel
+            </button>
+            <button className="flex-grow text-red-400">Search</button>
+          </div>
         </div>
       )}
     </header>
